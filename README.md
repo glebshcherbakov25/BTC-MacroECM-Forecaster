@@ -19,7 +19,7 @@ pip install -r requirements.txt
 # 3) Запуск дэшборда
 streamlit run app.py
 ```
-![Uploading image.png…]()
+![2025-11-14 144738.png…]()
 
 После запуска в браузере откроется UI. По умолчанию данные подтягиваются из Yahoo Finance:
 - BTC: `BTC-USD`
