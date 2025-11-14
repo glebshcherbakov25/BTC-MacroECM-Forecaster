@@ -1,0 +1,1888 @@
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://10.120.22.24:8501
+  External URL: http://194.87.45.39:8501
+
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:12 in <module>                                      |
+|                                                                                      |
+|     9 from io import StringIO                                                        |
+|    10 from typing import Dict, List, Tuple                                           |
+|    11                                                                                |
+| >  12 from scenario_core import (                                                    |
+|    13     aggregate_to_weekly,                                                       |
+|    14     build_ecm_matrix,                                                          |
+|    15     fit_short_run_on_last_window_ols,                                          |
+|                                                                                      |
+| C:\btc_scenario_dashboard\scenario_core.py:58 in <module>                            |
+|                                                                                      |
+|    55 # (BTC, SP500, DXY, OIL и их логарифмы)                                        |
+|    56                                                                                |
+|    57 df = aggregate_to_weekly(                                                      |
+| >  58     df,                                                                        |
+|    59     date_col="date",                                                           |
+|    60     week_freq="W-WED",  2025-10-09 15:06:10.484 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 128, in exec_func_with_error_handling
+    result = func()
+             ^^^^^^
+  File "C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 669, in code_to_exec
+    exec(code, module.__dict__)  # noqa: S102
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\btc_scenario_dashboard\app.py", line 12, in <module>
+    from scenario_core import (
+  File "C:\btc_scenario_dashboard\scenario_core.py", line 58, in <module>
+    df,
+    ^^
+NameError: name 'df' is not defined
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:12 in <module>                                      |
+|                                                                                      |
+|     9 from io import StringIO                                                        |
+|    10 from typing import Dict, List, Tuple                                           |
+|    11                                                                                |
+| >  12 from scenario_core import (                                                    |
+|    13     aggregate_to_weekly,                                                       |
+|    14     build_ecm_matrix,                                                          |
+|    15     fit_short_run_on_last_window_ols,                                          |
+|                                                                                      |
+| C:\btc_scenario_dashboard\scenario_core.py:80 in <module>                            |
+|                                                                                      |
+|    77 import matplotlib.pyplot as plt                                                |
+|    78 from matplotlib.gridspec import GridSpec                                       |
+|    79                                                                                |
+| >  80 # -------- параметры --------                                                  |
+|    81 WINDOW_LEN = 331   # окно оценки ECM (нед.)                                    |
+|    82 LAGY, LAGX = 1, 1  2025-10-09 15:12:53.213 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 128, in exec_func_with_error_handling
+    result = func()
+             ^^^^^^
+  File "C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 669, in code_to_exec
+    exec(code, module.__dict__)  # noqa: S102
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\btc_scenario_dashboard\app.py", line 12, in <module>
+    from scenario_core import (
+  File "C:\btc_scenario_dashboard\scenario_core.py", line 80, in <module>
+    raise RuntimeError(f"Переменная `{v}` не найдена. Сначала подготовь {v}.")
+RuntimeError: Переменная `y` не найдена. Сначала подготовь y.
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:97 in <module>                                      |
+|                                                                                      |
+|    94     df = df.sort_values("date").drop_duplicates("date")                        |
+|    95     return df                                                                  |
+|    96                                                                                |
+| >  97 df_daily = _load_or_download(start_date, end_date, btc_csv, spx_csv, dxy_csv,  |
+|    98                                                                                |
+|    99 st.subheader("1) История (daily)")                                             |
+|   100 st.dataframe(df_daily.tail(10), use_container_width=True)                      |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:94 in _load_or_download                             |
+|                                                                                      |
+|    91     df = frames["BTC"]                                                         |
+|    92     for k in ["SP500","DXY","OIL"]:                                            |
+|    93         df = df.merge(frames[k], how="outer", on="date")                       |
+| >  94     df = df.sort_values("date").drop_duplicates("date")                        |
+|    95     return df                                                                  |
+|    96                                                                                |
+|    97 df_daily = _load_or_download(start_date, end_date, btc_csv, spx_csv, dxy_csv,  |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\pandas\core\frame.py:6566 in              |
+| drop_duplicates                                                                      |
+|                                                                                      |
+|    6563         inplace = validate_bool_kwarg(inplace, "inplace")                    |
+|    6564         ignore_index = validate_bool_kwarg(ignore_index, "ignore_index")     |
+|    6565                                                                              |
+| >  6566         result = self[-self.duplicated(subset, keep=keep)]                   |
+|    6567         if ignore_index:                                                     |
+|    6568             result.index = default_index(len(result))                        |
+|    6569                                                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\pandas\core\frame.py:6698 in duplicated   |
+|                                                                                      |
+|    6695         # key that doesn't exist.                                            |
+|    6696         diff = set(subset) - set(self.columns)                               |
+|    6697         if diff:                                                             |
+| >  6698             raise KeyError(Index(diff))                                      |
+|    6699                                                                              |
+|    6700         if len(subset) == 1 and self.columns.is_unique:                      |
+|    6701             # GH#45236 This is faster than get_group_index below             |
++--------------------------------------------------------------------------------------+
+KeyError: Index(['date'], dtype='object')
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:179 in <module>                                     |
+|                                                                                      |
+|   176     return df                                                                  |
+|   177                                                                                |
+|   178                                                                                |
+| > 179 df_daily = _load_or_download(start_date, end_date, btc_csv, spx_csv, dxy_csv,  |
+|   180                                                                                |
+|   181 st.subheader("1) История (daily)")                                             |
+|   182 st.dataframe(df_daily.tail(10), use_container_width=True)                      |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:119 in _load_or_download                            |
+|                                                                                      |
+|   116         col = col if isinstance(col, str) else (col[0] if col else d.columns[1 |
+|   117         frames["BTC"] = d[["date", col]].rename(columns={col: "BTC"})          |
+|   118     elif use_auto:                                                             |
+| > 119         frames["BTC"] = _download("BTC-USD", str(start), str(end), "Adj Close" |
+|   120                                                                                |
+|   121     # --- SP500 ---                                                            |
+|   122     if spx_csv is not None:                                                    |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 227 in __call__                                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 269 in _get_or_create_cached_value                                                   |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 328 in _handle_cache_miss                                                            |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:88 in _download                                     |
+|                                                                                      |
+|    85         col = "Close" if "Close" in df.columns else df.columns[1]              |
+|    86     df = df[["date", col]].rename(columns={col: rename_to})                    |
+|    87     df["date"] = pd.to_datetime(df["date"], errors="coerce")                   |
+| >  88     df = df.dropna(subset=["date"])                                            |
+|    89     return df                                                                  |
+|    90                                                                                |
+|    91 def _ensure_date_col(d: pd.DataFrame) -> pd.DataFrame:                         |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\pandas\core\frame.py:6418 in dropna       |
+|                                                                                      |
+|    6415             indices = ax.get_indexer_for(subset)                             |
+|    6416             check = indices == -1                                            |
+|    6417             if check.any():                                                  |
+| >  6418                 raise KeyError(np.array(subset)[check].tolist())             |
+|    6419             agg_obj = self.take(indices, axis=agg_axis)                      |
+|    6420                                                                              |
+|    6421         if thresh is not lib.no_default:                                     |
++--------------------------------------------------------------------------------------+
+KeyError: ['date']
+2025-10-09 16:11:04.835 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 16:11:04.903 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:179 in <module>                                     |
+|                                                                                      |
+|   176     return df                                                                  |
+|   177                                                                                |
+|   178                                                                                |
+| > 179 df_daily = _load_or_download(start_date, end_date, btc_csv, spx_csv, dxy_csv,  |
+|   180                                                                                |
+|   181 st.subheader("1) История (daily)")                                             |
+|   182 st.dataframe(df_daily.tail(10), use_container_width=True)                      |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:119 in _load_or_download                            |
+|                                                                                      |
+|   116         col = col if isinstance(col, str) else (col[0] if col else d.columns[1 |
+|   117         frames["BTC"] = d[["date", col]].rename(columns={col: "BTC"})          |
+|   118     elif use_auto:                                                             |
+| > 119         frames["BTC"] = _download("BTC-USD", str(start), str(end), "Adj Close" |
+|   120                                                                                |
+|   121     # --- SP500 ---                                                            |
+|   122     if spx_csv is not None:                                                    |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 227 in __call__                                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 269 in _get_or_create_cached_value                                                   |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 328 in _handle_cache_miss                                                            |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:88 in _download                                     |
+|                                                                                      |
+|    85         col = "Close" if "Close" in df.columns else df.columns[1]              |
+|    86     df = df[["date", col]].rename(columns={col: rename_to})                    |
+|    87     df["date"] = pd.to_datetime(df["date"], errors="coerce")                   |
+| >  88     df = df.dropna(subset=["date"])                                            |
+|    89     return df                                                                  |
+|    90                                                                                |
+|    91 def _ensure_date_col(d: pd.DataFrame) -> pd.DataFrame:                         |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\pandas\core\frame.py:6418 in dropna       |
+|                                                                                      |
+|    6415             indices = ax.get_indexer_for(subset)                             |
+|    6416             check = indices == -1                                            |
+|    6417             if check.any():                                                  |
+| >  6418                 raise KeyError(np.array(subset)[check].tolist())             |
+|    6419             agg_obj = self.take(indices, axis=agg_axis)                      |
+|    6420                                                                              |
+|    6421         if thresh is not lib.no_default:                                     |
++--------------------------------------------------------------------------------------+
+KeyError: ['date']
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:219 in <module>                                     |
+|                                                                                      |
+|   216     return df                                                                  |
+|   217                                                                                |
+|   218                                                                                |
+| > 219 df_daily = _load_or_download(start_date, end_date, btc_csv, spx_csv, dxy_csv,  |
+|   220                                                                                |
+|   221 st.subheader("1) История (daily)")                                             |
+|   222 st.dataframe(df_daily.tail(10), use_container_width=True)                      |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:159 in _load_or_download                            |
+|                                                                                      |
+|   156         col = col if isinstance(col, str) else (col[0] if col else d.columns[1 |
+|   157         frames["BTC"] = d[["date", col]].rename(columns={col: "BTC"})          |
+|   158     elif use_auto:                                                             |
+| > 159         frames["BTC"] = _download("BTC-USD", str(start), str(end), "Adj Close" |
+|   160                                                                                |
+|   161     # --- SP500 ---                                                            |
+|   162     if spx_csv is not None:                                                    |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 227 in __call__                                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 269 in _get_or_create_cached_value                                                   |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 328 in _handle_cache_miss                                                            |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:128 in _download                                    |
+|                                                                                      |
+|   125         col = "Close" if "Close" in df.columns else df.columns[1]              |
+|   126     df = df[["date", col]].rename(columns={col: rename_to})                    |
+|   127     df["date"] = pd.to_datetime(df["date"], errors="coerce")                   |
+| > 128     df = df.dropna(subset=["date"])                                            |
+|   129     return df                                                                  |
+|   130                                                                                |
+|   131 def _ensure_date_col(d: pd.DataFrame) -> pd.DataFrame:                         |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\pandas\core\frame.py:6418 in dropna       |
+|                                                                                      |
+|    6415             indices = ax.get_indexer_for(subset)                             |
+|    6416             check = indices == -1                                            |
+|    6417             if check.any():                                                  |
+| >  6418                 raise KeyError(np.array(subset)[check].tolist())             |
+|    6419             agg_obj = self.take(indices, axis=agg_axis)                      |
+|    6420                                                                              |
+|    6421         if thresh is not lib.no_default:                                     |
++--------------------------------------------------------------------------------------+
+KeyError: ['date']
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:174 in <module>                                     |
+|                                                                                      |
+|   171     df = df.drop_duplicates(subset=["date"], keep="last")                      |
+|   172     return df                                                                  |
+|   173                                                                                |
+| > 174 df_daily = _load_or_download(start_date, end_date, btc_csv, spx_csv, dxy_csv,  |
+|   175                                                                                |
+|   176 if df_daily.empty:                                                             |
+|   177     st.error("Пустые данные. Задай другой период или загрузи CSV.")            |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:113 in _load_or_download                            |
+|                                                                                      |
+|   110             col = "BTC"                                                        |
+|   111         frames["BTC"] = d[["date", col]].rename(columns={col: "BTC"})          |
+|   112     elif use_auto:                                                             |
+| > 113         frames["BTC"] = _download("BTC-USD", str(start), str(end), "Adj Close" |
+|   114                                                                                |
+|   115     # --- SP500 ---                                                            |
+|   116     if spx_csv is not None:                                                    |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 227 in __call__                                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 269 in _get_or_create_cached_value                                                   |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 328 in _handle_cache_miss                                                            |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:80 in _download                                     |
+|                                                                                      |
+|    77                                                                                |
+|    78     df = df[["date", col]].rename(columns={col: rename_to})                    |
+|    79     df["date"] = pd.to_datetime(df["date"], errors="coerce")                   |
+| >  80     df = df.dropna(subset=["date"]).sort_values("date")                        |
+|    81     return df                                                                  |
+|    82                                                                                |
+|    83 def _ensure_date_col(d: pd.DataFrame) -> pd.DataFrame:                         |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\pandas\core\frame.py:6418 in dropna       |
+|                                                                                      |
+|    6415             indices = ax.get_indexer_for(subset)                             |
+|    6416             check = indices == -1                                            |
+|    6417             if check.any():                                                  |
+| >  6418                 raise KeyError(np.array(subset)[check].tolist())             |
+|    6419             agg_obj = self.take(indices, axis=agg_axis)                      |
+|    6420                                                                              |
+|    6421         if thresh is not lib.no_default:                                     |
++--------------------------------------------------------------------------------------+
+KeyError: ['date']
+2025-10-09 16:39:20.099 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 16:39:27.224 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 16:39:35.842 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 16:39:41.512 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 16:39:41.595 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 16:39:41.723 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 16:40:03.112 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 16:40:04.122 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 16:40:05.801 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 16:41:12.271 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 16:41:15.074 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 16:41:17.702 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 16:49:09.055 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 16:49:09.483 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 16:49:10.041 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:128 in <module>                                     |
+|                                                                                      |
+|   125     return df                                                                  |
+|   126                                                                                |
+|   127 # ===== Load daily & weekly =====                                              |
+| > 128 df_daily = _load_or_download(start_date, end_date, btc_csv, spx_csv, dxy_csv,  |
+|   129 if df_daily.empty:                                                             |
+|   130     st.error("Пустые данные. Задай другой период/загрузи CSV."); st.stop()     |
+|   131                                                                                |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:89 in _load_or_download                             |
+|                                                                                      |
+|    86         col = "BTC" if "BTC" in d.columns else ([c for c in d.columns if c.low |
+|    87         frames["BTC"] = d[["date", col]].rename(columns={col:"BTC"})           |
+|    88     elif use_auto:                                                             |
+| >  89         frames["BTC"] = _download("BTC-USD", str(start), str(end), "Adj Close" |
+|    90     # SP500                                                                    |
+|    91     if spx_csv is not None:                                                    |
+|    92         d = pd.read_csv(spx_csv); d = _ensure_date_col(d)                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 227 in __call__                                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 269 in _get_or_create_cached_value                                                   |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 328 in _handle_cache_miss                                                            |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:64 in _download                                     |
+|                                                                                      |
+|    61         col = "Close" if "Close" in df.columns else df.columns[1]              |
+|    62     out = df[["date", col]].rename(columns={col: rename_to}).copy()            |
+|    63     out["date"] = pd.to_datetime(out["date"], errors="coerce")                 |
+| >  64     return out.dropna(subset=["date"]).sort_values("date")                     |
+|    65                                                                                |
+|    66 def _ensure_date_col(d: pd.DataFrame) -> pd.DataFrame:                         |
+|    67     d = d.copy()                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\pandas\core\frame.py:6418 in dropna       |
+|                                                                                      |
+|    6415             indices = ax.get_indexer_for(subset)                             |
+|    6416             check = indices == -1                                            |
+|    6417             if check.any():                                                  |
+| >  6418                 raise KeyError(np.array(subset)[check].tolist())             |
+|    6419             agg_obj = self.take(indices, axis=agg_axis)                      |
+|    6420                                                                              |
+|    6421         if thresh is not lib.no_default:                                     |
++--------------------------------------------------------------------------------------+
+KeyError: ['date']
+2025-10-09 18:01:15.499 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 18:01:19.815 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 18:01:25.100 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 18:01:30.296 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 18:01:30.385 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:180 in <module>                                     |
+|                                                                                      |
+|   177     st.markdown("**OIL**")                                                     |
+|   178     oil_mode = st.radio("Режим", ["Custom годовые темпы", "Тренд 52 недель", " |
+|   179     if oil_mode == "Custom годовые темпы":                                     |
+| > 180         oil_r1 = st.number_input("Годовой темп (первые 52 недели), %", -100.0, |
+|   181         oil_r2 = st.number_input("Годовой темп (далее), %", -100.0, 200.0, 0.0 |
+|   182                                                                                |
+|   183 # deterministic future                                                         |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\metrics_util.py:443 in  |
+| wrapped_func                                                                         |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\widgets\number_input.p |
+| y:401 in number_input                                                                |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\widgets\number_input.p |
+| y:452 in _number_input                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\lib\utils.py:265 in    |
+| compute_and_register_element_id                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\lib\utils.py:150 in    |
+| _register_element_id                                                                 |
++--------------------------------------------------------------------------------------+
+StreamlitDuplicateElementId: There are multiple `number_input` elements with the same 
+auto-generated ID. When this element is created, it is assigned an internal ID based on 
+the element type and provided parameters. Multiple elements with the same type and 
+parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `number_input` element.
+2025-10-09 18:01:37.274 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 18:01:37.343 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 18:01:37.398 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 18:01:40.270 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 18:01:40.337 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 18:01:40.399 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 18:04:25.988 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 18:04:27.819 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 18:07:31.129 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 18:07:31.200 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 18:07:31.260 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 18:07:46.256 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 18:07:46.325 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 18:07:46.389 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 18:10:32.286 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 18:10:33.976 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 19:07:09.284 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 19:07:09.332 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 19:07:09.391 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 19:08:09.205 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 19:08:09.236 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 19:08:09.263 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 19:09:29.993 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 19:09:30.740 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:128 in <module>                                     |
+|                                                                                      |
+|   125     return df                                                                  |
+|   126                                                                                |
+|   127 # ===== Load daily & weekly =====                                              |
+| > 128 df_daily = _load_or_download(start_date, end_date, btc_csv, spx_csv, dxy_csv,  |
+|   129 if df_daily.empty:                                                             |
+|   130     st.error("Пустые данные. Задай другой период/загрузи CSV."); st.stop()     |
+|   131                                                                                |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:89 in _load_or_download                             |
+|                                                                                      |
+|    86         col = "BTC" if "BTC" in d.columns else ([c for c in d.columns if c.low |
+|    87         frames["BTC"] = d[["date", col]].rename(columns={col:"BTC"})           |
+|    88     elif use_auto:                                                             |
+| >  89         frames["BTC"] = _download("BTC-USD", str(start), str(end), "Adj Close" |
+|    90     # SP500                                                                    |
+|    91     if spx_csv is not None:                                                    |
+|    92         d = pd.read_csv(spx_csv); d = _ensure_date_col(d)                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 227 in __call__                                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 269 in _get_or_create_cached_value                                                   |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 328 in _handle_cache_miss                                                            |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:64 in _download                                     |
+|                                                                                      |
+|    61         col = "Close" if "Close" in df.columns else df.columns[1]              |
+|    62     out = df[["date", col]].rename(columns={col: rename_to}).copy()            |
+|    63     out["date"] = pd.to_datetime(out["date"], errors="coerce")                 |
+| >  64     return out.dropna(subset=["date"]).sort_values("date")                     |
+|    65                                                                                |
+|    66 def _ensure_date_col(d: pd.DataFrame) -> pd.DataFrame:                         |
+|    67     d = d.copy()                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\pandas\core\frame.py:6418 in dropna       |
+|                                                                                      |
+|    6415             indices = ax.get_indexer_for(subset)                             |
+|    6416             check = indices == -1                                            |
+|    6417             if check.any():                                                  |
+| >  6418                 raise KeyError(np.array(subset)[check].tolist())             |
+|    6419             agg_obj = self.take(indices, axis=agg_axis)                      |
+|    6420                                                                              |
+|    6421         if thresh is not lib.no_default:                                     |
++--------------------------------------------------------------------------------------+
+KeyError: ['date']
+2025-10-09 21:26:15.817 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 21:26:20.068 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 21:26:25.013 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 21:26:31.001 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 21:26:31.057 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:180 in <module>                                     |
+|                                                                                      |
+|   177     st.markdown("**OIL**")                                                     |
+|   178     oil_mode = st.radio("Режим", ["Custom годовые темпы", "Тренд 52 недель", " |
+|   179     if oil_mode == "Custom годовые темпы":                                     |
+| > 180         oil_r1 = st.number_input("Годовой темп (первые 52 недели), %", -100.0, |
+|   181         oil_r2 = st.number_input("Годовой темп (далее), %", -100.0, 200.0, 0.0 |
+|   182                                                                                |
+|   183 # deterministic future                                                         |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\metrics_util.py:443 in  |
+| wrapped_func                                                                         |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\widgets\number_input.p |
+| y:401 in number_input                                                                |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\widgets\number_input.p |
+| y:452 in _number_input                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\lib\utils.py:265 in    |
+| compute_and_register_element_id                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\lib\utils.py:150 in    |
+| _register_element_id                                                                 |
++--------------------------------------------------------------------------------------+
+StreamlitDuplicateElementId: There are multiple `number_input` elements with the same 
+auto-generated ID. When this element is created, it is assigned an internal ID based on 
+the element type and provided parameters. Multiple elements with the same type and 
+parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `number_input` element.
+2025-10-09 21:26:49.260 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 21:26:49.311 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 21:26:49.364 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 21:26:59.819 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 21:26:59.885 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 21:26:59.938 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 21:28:28.874 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-09 21:28:29.788 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:128 in <module>                                     |
+|                                                                                      |
+|   125     return df                                                                  |
+|   126                                                                                |
+|   127 # ===== Load daily & weekly =====                                              |
+| > 128 df_daily = _load_or_download(start_date, end_date, btc_csv, spx_csv, dxy_csv,  |
+|   129 if df_daily.empty:                                                             |
+|   130     st.error("Пустые данные. Задай другой период/загрузи CSV."); st.stop()     |
+|   131                                                                                |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:89 in _load_or_download                             |
+|                                                                                      |
+|    86         col = "BTC" if "BTC" in d.columns else ([c for c in d.columns if c.low |
+|    87         frames["BTC"] = d[["date", col]].rename(columns={col:"BTC"})           |
+|    88     elif use_auto:                                                             |
+| >  89         frames["BTC"] = _download("BTC-USD", str(start), str(end), "Adj Close" |
+|    90     # SP500                                                                    |
+|    91     if spx_csv is not None:                                                    |
+|    92         d = pd.read_csv(spx_csv); d = _ensure_date_col(d)                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 227 in __call__                                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 269 in _get_or_create_cached_value                                                   |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 328 in _handle_cache_miss                                                            |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:64 in _download                                     |
+|                                                                                      |
+|    61         col = "Close" if "Close" in df.columns else df.columns[1]              |
+|    62     out = df[["date", col]].rename(columns={col: rename_to}).copy()            |
+|    63     out["date"] = pd.to_datetime(out["date"], errors="coerce")                 |
+| >  64     return out.dropna(subset=["date"]).sort_values("date")                     |
+|    65                                                                                |
+|    66 def _ensure_date_col(d: pd.DataFrame) -> pd.DataFrame:                         |
+|    67     d = d.copy()                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\pandas\core\frame.py:6418 in dropna       |
+|                                                                                      |
+|    6415             indices = ax.get_indexer_for(subset)                             |
+|    6416             check = indices == -1                                            |
+|    6417             if check.any():                                                  |
+| >  6418                 raise KeyError(np.array(subset)[check].tolist())             |
+|    6419             agg_obj = self.take(indices, axis=agg_axis)                      |
+|    6420                                                                              |
+|    6421         if thresh is not lib.no_default:                                     |
++--------------------------------------------------------------------------------------+
+KeyError: ['date']
+2025-10-10 15:32:44.781 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-10 15:32:49.256 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-10 15:32:53.882 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-10 15:32:58.661 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-10 15:32:58.694 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:180 in <module>                                     |
+|                                                                                      |
+|   177     st.markdown("**OIL**")                                                     |
+|   178     oil_mode = st.radio("Режим", ["Custom годовые темпы", "Тренд 52 недель", " |
+|   179     if oil_mode == "Custom годовые темпы":                                     |
+| > 180         oil_r1 = st.number_input("Годовой темп (первые 52 недели), %", -100.0, |
+|   181         oil_r2 = st.number_input("Годовой темп (далее), %", -100.0, 200.0, 0.0 |
+|   182                                                                                |
+|   183 # deterministic future                                                         |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\metrics_util.py:443 in  |
+| wrapped_func                                                                         |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\widgets\number_input.p |
+| y:401 in number_input                                                                |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\widgets\number_input.p |
+| y:452 in _number_input                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\lib\utils.py:265 in    |
+| compute_and_register_element_id                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\lib\utils.py:150 in    |
+| _register_element_id                                                                 |
++--------------------------------------------------------------------------------------+
+StreamlitDuplicateElementId: There are multiple `number_input` elements with the same 
+auto-generated ID. When this element is created, it is assigned an internal ID based on 
+the element type and provided parameters. Multiple elements with the same type and 
+parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `number_input` element.
+2025-10-10 15:33:08.352 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-10 15:33:08.387 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-10 15:33:08.428 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-10 15:33:18.294 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-10 15:33:18.330 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:180 in <module>                                     |
+|                                                                                      |
+|   177     st.markdown("**OIL**")                                                     |
+|   178     oil_mode = st.radio("Режим", ["Custom годовые темпы", "Тренд 52 недель", " |
+|   179     if oil_mode == "Custom годовые темпы":                                     |
+| > 180         oil_r1 = st.number_input("Годовой темп (первые 52 недели), %", -100.0, |
+|   181         oil_r2 = st.number_input("Годовой темп (далее), %", -100.0, 200.0, 0.0 |
+|   182                                                                                |
+|   183 # deterministic future                                                         |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\metrics_util.py:443 in  |
+| wrapped_func                                                                         |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\widgets\number_input.p |
+| y:401 in number_input                                                                |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\widgets\number_input.p |
+| y:452 in _number_input                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\lib\utils.py:265 in    |
+| compute_and_register_element_id                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\lib\utils.py:150 in    |
+| _register_element_id                                                                 |
++--------------------------------------------------------------------------------------+
+StreamlitDuplicateElementId: There are multiple `number_input` elements with the same 
+auto-generated ID. When this element is created, it is assigned an internal ID based on 
+the element type and provided parameters. Multiple elements with the same type and 
+parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `number_input` element.
+2025-10-10 15:33:28.647 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-10 15:33:28.682 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:180 in <module>                                     |
+|                                                                                      |
+|   177     st.markdown("**OIL**")                                                     |
+|   178     oil_mode = st.radio("Режим", ["Custom годовые темпы", "Тренд 52 недель", " |
+|   179     if oil_mode == "Custom годовые темпы":                                     |
+| > 180         oil_r12025-10-10 15:33:28.866 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+ = st.number_input("Годовой темп (первые 52 недели), %", -100.0, |
+|   181         oil_r2 = st.number_input("Годовой темп (далее), %", -100.0, 200.0, 0.0 |
+|   182                                                                                |
+|   2025-10-10 15:33:28.906 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+183 # deterministic future                                                         |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\metrics_util.py:443 in  |
+| wrapped_func                                                                         |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\widgets\number_input.p |
+| y:401 in number_input                                                                |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\widgets\number_input.p |
+| y:452 in _number_input                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\lib\utils.py:265 in    |
+| compute_and_register_element_id                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\lib\utils.py:2025-10-10 15:33:28.950 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+150 in    |
+| _register_element_id                                                                 |
++--------------------------------------------------------------------------------------+
+StreamlitDuplicateElementId: There are multiple `number_input` elements with the same 
+auto-generated ID. When this element is created, it is assigned an internal ID based on 
+the element type and provided parameters. Multiple elements with the same type and 
+parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `number_input` element.
+2025-10-10 15:33:38.544 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-10 15:33:38.580 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-10 15:33:38.617 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:128 in <module>                                     |
+|                                                                                      |
+|   125     return df                                                                  |
+|   126                                                                                |
+|   127 # ===== Load daily & weekly =====                                              |
+| > 128 df_daily = _load_or_download(start_date, end_date, btc_csv, spx_csv, dxy_csv,  |
+|   129 if df_daily.empty:                                                             |
+|   130     st.error("Пустые данные. Задай другой период/загрузи CSV."); st.stop()     |
+|   131                                                                                |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:89 in _load_or_download                             |
+|                                                                                      |
+|    86         col = "BTC" if "BTC" in d.columns else ([c for c in d.columns if c.low |
+|    87         frames["BTC"] = d[["date", col]].rename(columns={col:"BTC"})           |
+|    88     elif use_auto:                                                             |
+| >  89         frames["BTC"] = _download("BTC-USD", str(start), str(end), "Adj Close" |
+|    90     # SP500                                                                    |
+|    91     if spx_csv is not None:                                                    |
+|    92         d = pd.read_csv(spx_csv); d = _ensure_date_col(d)                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 227 in __call__                                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 269 in _get_or_create_cached_value                                                   |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 328 in _handle_cache_miss                                                            |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:64 in _download                                     |
+|                                                                                      |
+|    61         col = "Close" if "Close" in df.columns else df.columns[1]              |
+|    62     out = df[["date", col]].rename(columns={col: rename_to}).copy()            |
+|    63     out["date"] = pd.to_datetime(out["date"], errors="coerce")                 |
+| >  64     return out.dropna(subset=["date"]).sort_values("date")                     |
+|    65                                                                                |
+|    66 def _ensure_date_col(d: pd.DataFrame) -> pd.DataFrame:                         |
+|    67     d = d.copy()                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\pandas\core\frame.py:6418 in dropna       |
+|                                                                                      |
+|    6415             indices = ax.get_indexer_for(subset)                             |
+|    6416             check = indices == -1                                            |
+|    6417             if check.any():                                                  |
+| >  6418                 raise KeyError(np.array(subset)[check].tolist())             |
+|    6419             agg_obj = self.take(indices, axis=agg_axis)                      |
+|    6420                                                                              |
+|    6421         if thresh is not lib.no_default:                                     |
++--------------------------------------------------------------------------------------+
+KeyError: ['date']
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+libifcoremd.dll    00007FFB2E02DF54  Unknown               Unknown  Unknown
+KERNELBASE.dll     00007FFBEA1BA09D  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFBECA1E8D7  Unknown               Unknown  Unknown
+ntdll.dll          00007FFBECF68D9C  Unknown               Unknown  Unknown
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://192.168.1.121:8501
+  External URL: http://194.87.45.39:8501
+
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:128 in <module>                                     |
+|                                                                                      |
+|   125     return df                                                                  |
+|   126                                                                                |
+|   127 # ===== Load daily & weekly =====                                              |
+| > 128 df_daily = _load_or_download(start_date, end_date, btc_csv, spx_csv, dxy_csv,  |
+|   129 if df_daily.empty:                                                             |
+|   130     st.error("Пустые данные. Задай другой период/загрузи CSV."); st.stop()     |
+|   131                                                                                |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:89 in _load_or_download                             |
+|                                                                                      |
+|    86         col = "BTC" if "BTC" in d.columns else ([c for c in d.columns if c.low |
+|    87         frames["BTC"] = d[["date", col]].rename(columns={col:"BTC"})           |
+|    88     elif use_auto:                                                             |
+| >  89         frames["BTC"] = _download("BTC-USD", str(start), str(end), "Adj Close" |
+|    90     # SP500                                                                    |
+|    91     if spx_csv is not None:                                                    |
+|    92         d = pd.read_csv(spx_csv); d = _ensure_date_col(d)                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 227 in __call__                                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 269 in _get_or_create_cached_value                                                   |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 328 in _handle_cache_miss                                                            |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:64 in _download                                     |
+|                                                                                      |
+|    61         col = "Close" if "Close" in df.columns else df.columns[1]              |
+|    62     out = df[["date", col]].rename(columns={col: rename_to}).copy()            |
+|    63     out["date"] = pd.to_datetime(out["date"], errors="coerce")                 |
+| >  64     return out.dropna(subset=["date"]).sort_values("date")                     |
+|    65                                                                                |
+|    66 def _ensure_date_col(d: pd.DataFrame) -> pd.DataFrame:                         |
+|    67     d = d.copy()                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\pandas\core\frame.py:6418 in dropna       |
+|                                                                                      |
+|    6415             indices = ax.get_indexer_for(subset)                             |
+|    6416             check = indices == -1                                            |
+|    6417             if check.any():                                                  |
+| >  6418                 raise KeyError(np.array(subset)[check].tolist())             |
+|    6419             agg_obj = self.take(indices, axis=agg_axis)                      |
+|    6420                                                                              |
+|    6421         if thresh is not lib.no_default:                                     |
++--------------------------------------------------------------------------------------+
+KeyError: ['date']
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:128 in <module>                                     |
+|                                                                                      |
+|   125     return df                                                                  |
+|   126                                                                                |
+|   127 # ===== Load daily & weekly =====                                              |
+| > 128 df_daily = _load_or_download(start_date, end_date, btc_csv, spx_csv, dxy_csv,  |
+|   129 if df_daily.empty:                                                             |
+|   130     st.error("Пустые данные. Задай другой период/загрузи CSV."); st.stop()     |
+|   131                                                                                |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:96 in _load_or_download                             |
+|                                                                                      |
+|    93         col = "SP500" if "SP500" in d.columns else ([c for c in d.columns if ( |
+|    94         frames["SP500"] = d[["date", col]].rename(columns={col:"SP500"})       |
+|    95     elif use_auto:                                                             |
+| >  96         frames["SP500"] = _download("^SPX", str(start), str(end), "Close", "SP |
+|    97     # DXY                                                                      |
+|    98     if dxy_csv is not None:                                                    |
+|    99         d = pd.read_csv(dxy_csv); d = _ensure_date_col(d)                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 227 in __call__                                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 269 in _get_or_create_cached_value                                                   |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 328 in _handle_cache_miss                                                            |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:64 in _download                                     |
+|                                                                                      |
+|    61         col = "Close" if "Close" in df.columns else df.columns[1]              |
+|    62     out = df[["date", col]].rename(columns={col: rename_to}).copy()            |
+|    63     out["date"] = pd.to_datetime(out["date"], errors="coerce")                 |
+| >  64     return out.dropna(subset=["date"]).sort_values("date")                     |
+|    65                                                                                |
+|    66 def _ensure_date_col(d: pd.DataFrame) -> pd.DataFrame:                         |
+|    67     d = d.copy()                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\pandas\core\frame.py:6418 in dropna       |
+|                                                                                      |
+|    6415             indices = ax.get_indexer_for(subset)                             |
+|    6416             check = indices == -1                                            |
+|    6417             if check.any():                                                  |
+| >  6418                 raise KeyError(np.array(subset)[check].tolist())             |
+|    6419             agg_obj = self.take(indices, axis=agg_axis)                      |
+|    6420                                                                              |
+|    6421         if thresh is not lib.no_default:                                     |
++--------------------------------------------------------------------------------------+
+KeyError: ['date']
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:128 in <module>                                     |
+|                                                                                      |
+|   125     return df                                                                  |
+|   126                                                                                |
+|   127 # ===== Load daily & weekly =====                                              |
+| > 128 df_daily = _load_or_download(start_date, end_date, btc_csv, spx_csv, dxy_csv,  |
+|   129 if df_daily.empty:                                                             |
+|   130     st.error("Пустые данные. Задай другой период/загрузи CSV."); st.stop()     |
+|   131                                                                                |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:89 in _load_or_download                             |
+|                                                                                      |
+|    86         col = "BTC" if "BTC" in d.columns else ([c for c in d.columns if c.low |
+|    87         frames["BTC"] = d[["date", col]].rename(columns={col:"BTC"})           |
+|    88     elif use_auto:                                                             |
+| >  89         frames["BTC"] = _download("BTC-USD", str(start), str(end), "Adj Close" |
+|    90     # SP500                                                                    |
+|    91     if spx_csv is not None:                                                    |
+|    92         d = pd.read_csv(spx_csv); d = _ensure_date_col(d)                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 227 in __call__                                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 269 in _get_or_create_cached_value                                                   |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 328 in _handle_cache_miss                                                            |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:64 in _download                                     |
+|                                                                                      |
+|    61         col = "Close" if "Close" in df.columns else df.columns[1]              |
+|    62     out = df[["date", col]].rename(columns={col: rename_to}).copy()            |
+|    63     out["date"] = pd.to_datetime(out["date"], errors="coerce")                 |
+| >  64     return out.dropna(subset=["date"]).sort_values("date")                     |
+|    65                                                                                |
+|    66 def _ensure_date_col(d: pd.DataFrame) -> pd.DataFrame:                         |
+|    67     d = d.copy()                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\pandas\core\frame.py:6418 in dropna       |
+|                                                                                      |
+|    6415             indices = ax.get_indexer_for(subset)                             |
+|    6416             check = indices == -1                                            |
+|    6417             if check.any():                                                  |
+| >  6418                 raise KeyError(np.array(subset)[check].tolist())             |
+|    6419             agg_obj = self.take(indices, axis=agg_axis)                      |
+|    6420                                                                              |
+|    6421         if thresh is not lib.no_default:                                     |
++--------------------------------------------------------------------------------------+
+KeyError: ['date']
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:128 in <module>                                     |
+|                                                                                      |
+|   125     return df                                                                  |
+|   126                                                                                |
+|   127 # ===== Load daily & weekly =====                                              |
+| > 128 df_daily = _load_or_download(start_date, end_date, btc_csv, spx_csv, dxy_csv,  |
+|   129 if df_daily.empty:                                                             |
+|   130     st.error("Пустые данные. Задай другой период/загрузи CSV."); st.stop()     |
+|   131                                                                                |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:96 in _load_or_download                             |
+|                                                                                      |
+|    93         col = "SP500" if "SP500" in d.columns else ([c for c in d.columns if ( |
+|    94         frames["SP500"] = d[["date", col]].rename(columns={col:"SP500"})       |
+|    95     elif use_auto:                                                             |
+| >  96         frames["SP500"] = _download("^SPX", str(start), str(end), "Close", "SP |
+|    97     # DXY                                                                      |
+|    98     if dxy_csv is not None:                                                    |
+|    99         d = pd.read_csv(dxy_csv); d = _ensure_date_col(d)                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 227 in __call__                                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 269 in _get_or_create_cached_value                                                   |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 328 in _handle_cache_miss                                                            |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:64 in _download                                     |
+|                                                                                      |
+|    61         col = "Close" if "Close" in df.columns else df.columns[1]              |
+|    62     out = df[["date", col]].rename(columns={col: rename_to}).copy()            |
+|    63     out["date"] = pd.to_datetime(out["date"], errors="coerce")                 |
+| >  64     return out.dropna(subset=["date"]).sort_values("date")                     |
+|    65                                                                                |
+|    66 def _ensure_date_col(d: pd.DataFrame) -> pd.DataFrame:                         |
+|    67     d = d.copy()                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\pandas\core\frame.py:6418 in dropna       |
+|                                                                                      |
+|    6415             indices = ax.get_indexer_for(subset)                             |
+|    6416             check = indices == -1                                            |
+|    6417             if check.any():                                                  |
+| >  6418                 raise KeyError(np.array(subset)[check].tolist())             |
+|    6419             agg_obj = self.take(indices, axis=agg_axis)                      |
+|    6420                                                                              |
+|    6421         if thresh is not lib.no_default:                                     |
++--------------------------------------------------------------------------------------+
+KeyError: ['date']
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:128 in <module>                                     |
+|                                                                                      |
+|   125     return df                                                                  |
+|   126                                                                                |
+|   127 # ===== Load daily & weekly =====                                              |
+| > 128 df_daily = _load_or_download(start_date, end_date, btc_csv, spx_csv, dxy_csv,  |
+|   129 if df_daily.empty:                                                             |
+|   130     st.error("Пустые данные. Задай другой период/загрузи CSV."); st.stop()     |
+|   131                                                                                |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:103 in _load_or_download                            |
+|                                                                                      |
+|   100         col = "DXY" if "DXY" in d.columns else ([c for c in d.columns if ("dxy |
+|   101         frames["DXY"] = d[["date", col]].rename(columns={col:"DXY"})           |
+|   102     elif use_auto:                                                             |
+| > 103         frames["DXY"] = _download("DX-Y.NYB", str(start), str(end), "Close", " |
+|   104     # OIL                                                                      |
+|   105     if oil_csv is not None:                                                    |
+|   106         d = pd.read_csv(oil_csv); d = _ensure_date_col(d)                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 227 in __call__                                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 269 in _get_or_create_cached_value                                                   |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 328 in _handle_cache_miss                                                            |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:64 in _download                                     |
+|                                                                                      |
+|    61         col = "Close" if "Close" in df.columns else df.columns[1]              |
+|    62     out = df[["date", col]].rename(columns={col: rename_to}).copy()            |
+|    63     out["date"] = pd.to_datetime(out["date"], errors="coerce")                 |
+| >  64     return out.dropna(subset=["date"]).sort_values("date")                     |
+|    65                                                                                |
+|    66 def _ensure_date_col(d: pd.DataFrame) -> pd.DataFrame:                         |
+|    67     d = d.copy()                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\pandas\core\frame.py:6418 in dropna       |
+|                                                                                      |
+|    6415             indices = ax.get_indexer_for(subset)                             |
+|    6416             check = indices == -1                                            |
+|    6417             if check.any():                                                  |
+| >  6418                 raise KeyError(np.array(subset)[check].tolist())             |
+|    6419             agg_obj = self.take(indices, axis=agg_axis)                      |
+|    6420                                                                              |
+|    6421         if thresh is not lib.no_default:                                     |
++--------------------------------------------------------------------------------------+
+KeyError: ['date']
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:128 in <module>                                     |
+|                                                                                      |
+|   125     return df                                                                  |
+|   126                                                                                |
+|   127 # ===== Load daily & weekly =====                                              |
+| > 128 df_daily = _load_or_download(start_date, end_date, btc_csv, spx_csv, dxy_csv,  |
+|   129 if df_daily.empty:                                                             |
+|   130     st.error("Пустые данные. Задай другой период/загрузи CSV."); st.stop()     |
+|   131                                                                                |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:110 in _load_or_download                            |
+|                                                                                      |
+|   107         col = "OIL" if "OIL" in d.columns else ([c for c in d.columns if any(k |
+|   108         frames["OIL"] = d[["date", col]].rename(columns={col:"OIL"})           |
+|   109     elif use_auto:                                                             |
+| > 110         frames["OIL"] = _download("BZ=F", str(start), str(end), "Close", "OIL" |
+|   111                                                                                |
+|   112     required = ["BTC","SP500","DXY","OIL"]                                     |
+|   113     base = next((k for k in required if k in frames and not frames[k].empty),  |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 227 in __call__                                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 269 in _get_or_create_cached_value                                                   |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 328 in _handle_cache_miss                                                            |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:64 in _download                                     |
+|                                                                                      |
+|    61         col = "Close" if "Close" in df.columns else df.columns[1]              |
+|    62     out = df[["date", col]].rename(columns={col: rename_to}).copy()            |
+|    63     out["date"] = pd.to_datetime(out["date"], errors="coerce")                 |
+| >  64     return out.dropna(subset=["date"]).sort_values("date")                     |
+|    65                                                                                |
+|    66 def _ensure_date_col(d: pd.DataFrame) -> pd.DataFrame:                         |
+|    67     d = d.copy()                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\pandas\core\frame.py:6418 in dropna       |
+|                                                                                      |
+|    6415             indices = ax.get_indexer_for(subset)                             |
+|    6416             check = indices == -1                                            |
+|    6417             if check.any():                                                  |
+| >  6418                 raise KeyError(np.array(subset)[check].tolist())             |
+|    6419             agg_obj = self.take(indices, axis=agg_axis)                      |
+|    6420                                                                              |
+|    6421         if thresh is not lib.no_default:                                     |
++--------------------------------------------------------------------------------------+
+KeyError: ['date']
+2025-10-21 13:00:32.044 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-10-21 13:00:32.116 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:180 in <module>                                     |
+|                                                                                      |
+|   177     st.markdown("**OIL**")                                                     |
+|   178     oil_mode = st.radio("Режим", ["Custom годовые темпы", "Тренд 52 недель", " |
+|   179     if oil_mode == "Custom годовые темпы":                                     |
+| > 180         oil_r1 = st.number_input("Годовой темп (первые 52 недели), %", -100.0, |
+|   181         oil_r2 = st.number_input("Годовой темп (далее), %", -100.0, 200.0, 0.0 |
+|   182                                                                                |
+|   183 # deterministic future                                                         |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\metrics_util.py:443 in  |
+| wrapped_func                                                                         |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\widgets\number_input.p |
+| y:401 in number_input                                                                |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\widgets\number_input.p |
+| y:452 in _number_input                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\lib\utils.py:265 in    |
+| compute_and_register_element_id                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\lib\utils.py:150 in    |
+| _register_element_id                                                                 |
++--------------------------------------------------------------------------------------+
+StreamlitDuplicateElementId: There are multiple `number_input` elements with the same 
+auto-generated ID. When this element is created, it is assigned an internal ID based on 
+the element type and provided parameters. Multiple elements with the same type and 
+parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `number_input` element.
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://10.8.82.53:8501
+  External URL: http://45.66.249.77:8501
+
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:128 in <module>                                     |
+|                                                                                      |
+|   125     return df                                                                  |
+|   126                                                                                |
+|   127 # ===== Load daily & weekly =====                                              |
+| > 128 df_daily = _load_or_download(start_date, end_date, btc_csv, spx_csv, dxy_csv,  |
+|   129 if df_daily.empty:                                                             |
+|   130     st.error("Пустые данные. Задай другой период/загрузи CSV."); st.stop()     |
+|   131                                                                                |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:89 in _load_or_download                             |
+|                                                                                      |
+|    86         col = "BTC" if "BTC" in d.columns else ([c for c in d.columns if c.low |
+|    87         frames["BTC"] = d[["date", col]].rename(columns={col:"BTC"})           |
+|    88     elif use_auto:                                                             |
+| >  89         frames["BTC"] = _download("BTC-USD", str(start), str(end), "Adj Close" |
+|    90     # SP500                                                                    |
+|    91     if spx_csv is not None:                                                    |
+|    92         d = pd.read_csv(spx_csv); d = _ensure_date_col(d)                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 227 in __call__                                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 269 in _get_or_create_cached_value                                                   |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 328 in _handle_cache_miss                                                            |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:64 in _download                                     |
+|                                                                                      |
+|    61         col = "Close" if "Close" in df.columns else df.columns[1]              |
+|    62     out = df[["date", col]].rename(columns={col: rename_to}).copy()            |
+|    63     out["date"] = pd.to_datetime(out["date"], errors="coerce")                 |
+| >  64     return out.dropna(subset=["date"]).sort_values("date")                     |
+|    65                                                                                |
+|    66 def _ensure_date_col(d: pd.DataFrame) -> pd.DataFrame:                         |
+|    67     d = d.copy()                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\pandas\core\frame.py:6418 in dropna       |
+|                                                                                      |
+|    6415             indices = ax.get_indexer_for(subset)                             |
+|    6416             check = indices == -1                                            |
+|    6417             if check.any():                                                  |
+| >  6418                 raise KeyError(np.array(subset)[check].tolist())             |
+|    6419             agg_obj = self.take(indices, axis=agg_axis)                      |
+|    6420                                                                              |
+|    6421         if thresh is not lib.no_default:                                     |
++--------------------------------------------------------------------------------------+
+KeyError: ['date']
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:128 in <module>                                     |
+|                                                                                      |
+|   125     return df                                                                  |
+|   126                                                                                |
+|   127 # ===== Load daily & weekly =====                                              |
+| > 128 df_daily = _load_or_download(start_date, end_date, btc_csv, spx_csv, dxy_csv,  |
+|   129 if df_daily.empty:                                                             |
+|   130     st.error("Пустые данные. Задай другой период/загрузи CSV."); st.stop()     |
+|   131                                                                                |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:96 in _load_or_download                             |
+|                                                                                      |
+|    93         col = "SP500" if "SP500" in d.columns else ([c for c in d.columns if ( |
+|    94         frames["SP500"] = d[["date", col]].rename(columns={col:"SP500"})       |
+|    95     elif use_auto:                                                             |
+| >  96         frames["SP500"] = _download("^SPX", str(start), str(end), "Close", "SP |
+|    97     # DXY                                                                      |
+|    98     if dxy_csv is not None:                                                    |
+|    99         d = pd.read_csv(dxy_csv); d = _ensure_date_col(d)                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 227 in __call__                                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 269 in _get_or_create_cached_value                                                   |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 328 in _handle_cache_miss                                                            |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:64 in _download                                     |
+|                                                                                      |
+|    61         col = "Close" if "Close" in df.columns else df.columns[1]              |
+|    62     out = df[["date", col]].rename(columns={col: rename_to}).copy()            |
+|    63     out["date"] = pd.to_datetime(out["date"], errors="coerce")                 |
+| >  64     return out.dropna(subset=["date"]).sort_values("date")                     |
+|    65                                                                                |
+|    66 def _ensure_date_col(d: pd.DataFrame) -> pd.DataFrame:                         |
+|    67     d = d.copy()                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\pandas\core\frame.py:6418 in dropna       |
+|                                                                                      |
+|    6415             indices = ax.get_indexer_for(subset)                             |
+|    6416             check = indices == -1                                            |
+|    6417             if check.any():                                                  |
+| >  6418                 raise KeyError(np.array(subset)[check].tolist())             |
+|    6419             agg_obj = self.take(indices, axis=agg_axis)                      |
+|    6420                                                                              |
+|    6421         if thresh is not lib.no_default:                                     |
++--------------------------------------------------------------------------------------+
+KeyError: ['date']
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:128 in <module>                                     |
+|                                                                                      |
+|   125     return df                                                                  |
+|   126                                                                                |
+|   127 # ===== Load daily & weekly =====                                              |
+| > 128 df_daily = _load_or_download(start_date, end_date, btc_csv, spx_csv, dxy_csv,  |
+|   129 if df_daily.empty:                                                             |
+|   130     st.error("Пустые данные. Задай другой период/загрузи CSV."); st.stop()     |
+|   131                                                                                |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:103 in _load_or_download                            |
+|                                                                                      |
+|   100         col = "DXY" if "DXY" in d.columns else ([c for c in d.columns if ("dxy |
+|   101         frames["DXY"] = d[["date", col]].rename(columns={col:"DXY"})           |
+|   102     elif use_auto:                                                             |
+| > 103         frames["DXY"] = _download("DX-Y.NYB", str(start), str(end), "Close", " |
+|   104     # OIL                                                                      |
+|   105     if oil_csv is not None:                                                    |
+|   106         d = pd.read_csv(oil_csv); d = _ensure_date_col(d)                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 227 in __call__                                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 269 in _get_or_create_cached_value                                                   |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 328 in _handle_cache_miss                                                            |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:64 in _download                                     |
+|                                                                                      |
+|    61         col = "Close" if "Close" in df.columns else df.columns[1]              |
+|    62     out = df[["date", col]].rename(columns={col: rename_to}).copy()            |
+|    63     out["date"] = pd.to_datetime(out["date"], errors="coerce")                 |
+| >  64     return out.dropna(subset=["date"]).sort_values("date")                     |
+|    65                                                                                |
+|    66 def _ensure_date_col(d: pd.DataFrame) -> pd.DataFrame:                         |
+|    67     d = d.copy()                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\pandas\core\frame.py:6418 in dropna       |
+|                                                                                      |
+|    6415             indices = ax.get_indexer_for(subset)                             |
+|    6416             check = indices == -1                                            |
+|    6417             if check.any():                                                  |
+| >  6418                 raise KeyError(np.array(subset)[check].tolist())             |
+|    6419             agg_obj = self.take(indices, axis=agg_axis)                      |
+|    6420                                                                              |
+|    6421         if thresh is not lib.no_default:                                     |
++--------------------------------------------------------------------------------------+
+KeyError: ['date']
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:128 in <module>                                     |
+|                                                                                      |
+|   125     return df                                                                  |
+|   126                                                                                |
+|   127 # ===== Load daily & weekly =====                                              |
+| > 128 df_daily = _load_or_download(start_date, end_date, btc_csv, spx_csv, dxy_csv,  |
+|   129 if df_daily.empty:                                                             |
+|   130     st.error("Пустые данные. Задай другой период/загрузи CSV."); st.stop()     |
+|   131                                                                                |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:110 in _load_or_download                            |
+|                                                                                      |
+|   107         col = "OIL" if "OIL" in d.columns else ([c for c in d.columns if any(k |
+|   108         frames["OIL"] = d[["date", col]].rename(columns={col:"OIL"})           |
+|   109     elif use_auto:                                                             |
+| > 110         frames["OIL"] = _download("BZ=F", str(start), str(end), "Close", "OIL" |
+|   111                                                                                |
+|   112     required = ["BTC","SP500","DXY","OIL"]                                     |
+|   113     base = next((k for k in required if k in frames and not frames[k].empty),  |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 227 in __call__                                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 269 in _get_or_create_cached_value                                                   |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\caching\cache_utils.py: |
+| 328 in _handle_cache_miss                                                            |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:64 in _download                                     |
+|                                                                                      |
+|    61         col = "Close" if "Close" in df.columns else df.columns[1]              |
+|    62     out = df[["date", col]].rename(columns={col: rename_to}).copy()            |
+|    63     out["date"] = pd.to_datetime(out["date"], errors="coerce")                 |
+| >  64     return out.dropna(subset=["date"]).sort_values("date")                     |
+|    65                                                                                |
+|    66 def _ensure_date_col(d: pd.DataFrame) -> pd.DataFrame:                         |
+|    67     d = d.copy()                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\pandas\core\frame.py:6418 in dropna       |
+|                                                                                      |
+|    6415             indices = ax.get_indexer_for(subset)                             |
+|    6416             check = indices == -1                                            |
+|    6417             if check.any():                                                  |
+| >  6418                 raise KeyError(np.array(subset)[check].tolist())             |
+|    6419             agg_obj = self.take(indices, axis=agg_axis)                      |
+|    6420                                                                              |
+|    6421         if thresh is not lib.no_default:                                     |
++--------------------------------------------------------------------------------------+
+KeyError: ['date']
+2025-11-14 14:17:53.370 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-11-14 14:17:53.480 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
++------------------------- Traceback (most recent call last) --------------------------+
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code. |
+| py:128 in exec_func_with_error_handling                                              |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\scriptrunner\script_run |
+| ner.py:669 in code_to_exec                                                           |
+|                                                                                      |
+| C:\btc_scenario_dashboard\app.py:180 in <module>                                     |
+|                                                                                      |
+|   177     st.markdown("**OIL**")                                                     |
+|   178     oil_mode = st.radio("Режим", ["Custom годовые темпы", "Тренд 52 недель", " |
+|   179     if oil_mode == "Custom годовые темпы":                                     |
+| > 180         oil_r1 = st.number_input("Годовой темп (первые 52 недели), %", -100.0, |
+|   181         oil_r2 = st.number_input("Годовой темп (далее), %", -100.0, 200.0, 0.0 |
+|   182                                                                                |
+|   183 # deterministic future                                                         |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\runtime\metrics_util.py:443 in  |
+| wrapped_func                                                                         |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\widgets\number_input.p |
+| y:401 in number_input                                                                |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\widgets\number_input.p |
+| y:452 in _number_input                                                               |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\lib\utils.py:265 in    |
+| compute_and_register_element_id                                                      |
+|                                                                                      |
+| C:\Users\gserb\anaconda3\Lib\site-packages\streamlit\elements\lib\utils.py:150 in    |
+| _register_element_id                                                                 |
++--------------------------------------------------------------------------------------+
+StreamlitDuplicateElementId: There are multiple `number_input` elements with the same 
+auto-generated ID. When this element is created, it is assigned an internal ID based on 
+the element type and provided parameters. Multiple elements with the same type and 
+parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `number_input` element.
+2025-11-14 14:18:09.312 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-11-14 14:18:09.370 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-11-14 14:18:09.430 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-11-14 14:18:13.223 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-11-14 14:18:13.269 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-11-14 14:18:13.351 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-11-14 14:19:42.205 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2025-11-14 14:19:43.148 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
