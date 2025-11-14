@@ -19,7 +19,7 @@ pip install -r requirements.txt
 # 3) Запуск дэшборда
 streamlit run app.py
 ```
-![2025-11-14 144738.png…]()
+ `![BTC-MacroECM UI](./ui.png)`
 
 После запуска в браузере откроется UI. По умолчанию данные подтягиваются из Yahoo Finance:
 - BTC: `BTC-USD`
