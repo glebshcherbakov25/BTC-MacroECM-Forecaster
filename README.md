@@ -1,7 +1,7 @@
 
-# BTC Scenario ECM Dashboard
+# BTC-MacroECM-Forecaster
 
-Интерактивный дэшборд на **Streamlit**: задайте сценарии для **SP500 / DXY / OIL**, получите **фан‑чарт прогноза BTC** и рассчитайте **доходность портфеля**.
+Интерактивный сервис на **Streamlit**: задайте сценарии для **SP500 / DXY / OIL**, получите **фан‑чарт прогноза BTC** и рассчитайте **доходность портфеля**.
 
 ## Быстрый старт
 
@@ -19,6 +19,7 @@ pip install -r requirements.txt
 # 3) Запуск дэшборда
 streamlit run app.py
 ```
+![Uploading image.png…]()
 
 После запуска в браузере откроется UI. По умолчанию данные подтягиваются из Yahoo Finance:
 - BTC: `BTC-USD`
