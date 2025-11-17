@@ -1,5 +1,4 @@
 
-# ==== Module preamble ====
 
 import numpy as _np
 import pandas as _pd
@@ -18,11 +17,11 @@ TREND_DEG = 1
 week_freq = 'W-FRI'
 
 
-# === aggregate_to_weekly ===
+
 import pandas as pd
 import numpy as np
 
-# --- функция агрегации дневных данных в недельные ---
+
 def aggregate_to_weekly(df, date_col="date", week_freq="W-WED", agg="last",
                         drop_all_nan=True, require_all_cols=None):
     d = df.copy()
@@ -50,21 +49,14 @@ def aggregate_to_weekly(df, date_col="date", week_freq="W-WED", agg="last",
     return w
 
 
-# --- применение ---
-# (удалено: пример из ноутбука, чтобы модуль не исполнял код при импорте)
 
-# === Scenario block (ECM + simulation) ===
-# ====================== СЦЕНАРНЫЙ ПРОГНОЗ ECM (108 недель, weekly как в df, УРОВНИ) ======================
-# Модель: OLS коинтеграция на уровнях → ECM → симуляции по сценариям факторов (уровни).
-# Окружение: y (BTC), X (SP500, DXY, OIL), weekly-частота как в df.
-# ----------------------------------------------------------------------------------------------------------
 import numpy as np
 import pandas as pd
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 
-# -------- параметры --------
+
 WINDOW_LEN = 331   # окно оценки ECM (нед.)
 LAGY, LAGX = 1, 1  # лаги Δy и ΔX в ECM
 WEEKS_H    = 108   # горизонт прогноза (нед.)
@@ -74,7 +66,7 @@ CORR_WIN   = 104   # окно (нед.) для μ/σ/корреляций по �
 ADD_TREND  = True  # тренд в коинтеграции
 TREND_DEG  = 1     # степень тренда (обычно 1 — линейный)
 
-# ---------- 1) Блок ECM в уровнях ----------
+
 def build_ecm_matrix(y_win, X_win, alpha, delta, beta_dict, lagy, lagx):
     """
     Δy_t ~ const + ECT_{t-1} + лаги Δy + лаги ΔX, где
@@ -98,14 +90,10 @@ def build_ecm_matrix(y_win, X_win, alpha, delta, beta_dict, lagy, lagx):
     Xreg = sm.add_constant(ecm.drop(columns="Dy"), has_constant="add")
     return Y, Xreg
 
-# ---------- Коинтеграция через обычный OLS (уровни) на последнем окне ----------
+
 def fit_short_run_on_last_window_ols(y, X, window_len, lagy, lagx,
                                      add_trend=True, trend_degree=1):
-    """
-    1) Long-run OLS: y ~ X (+ t + t^2 ...), всё в уровнях.
-    2) ECM на том же окне.
-    Возвращает (alpha, delta, beta_dict, params_ECM).
-    """
+   
     y_win = y.iloc[-window_len:]
     X_win = X.iloc[-window_len:]
 
@@ -127,7 +115,7 @@ def fit_short_run_on_last_window_ols(y, X, window_len, lagy, lagx,
     ecm_fit = sm.OLS(Y_tr, Xreg_tr).fit()
     return alpha, delta, beta_dict, ecm_fit.params.copy()
 
-# --- безопасное чтение значения по времени (если точного ts нет — берём последнее <= ts) ---
+
 def _safe_loc_last_le(series_or_df, ts, col=None):
     obj = series_or_df[col] if col is not None else series_or_df
     try:
@@ -153,9 +141,7 @@ def _wk(obj):
 def simulate_ecm_scenario_weekly(y_hist, X_hist, X_future,
                                  alpha, delta, beta_dict, sr_params,
                                  lagy, lagx, window_len):
-    """
-    Симуляция BTC в уровнях: рекурсивно через ECM-приращения Δy_t.
-    """
+   
     y_hist  = _wk(y_hist)
     X_hist  = _wk(X_hist)
     X_future= _wk(X_future)
@@ -191,21 +177,18 @@ def simulate_ecm_scenario_weekly(y_hist, X_hist, X_future,
 
     return y_sim.loc[fut_idx]
 
-# ---------- 2) Сценарные пути факторов (детерминированные тренды, УРОВНИ) ----------
+
 def build_future_index_weekly(last_date, weeks=108, week_freq=week_freq):
-    # будущие недели в той же частоте
+    
     start = (pd.Timestamp(last_date) + pd.Timedelta(days=1)).to_period(week_freq).to_timestamp()
     return pd.date_range(start, periods=weeks, freq=week_freq)
 
 def _weekly_rate_from_annual(r_year):
-    # перевод годового темпа в недельный для уровней
+    
     return (1.0 + r_year)**(1.0/52.0) - 1.0
 
 def path_from_two_annual_rates_weekly_level(x_last, r_year1, r_year2, horizon_weeks, idx):
-    """
-    УРОВНИ: x_{t+1} = x_t * (1 + r_week), где r_week из годового r_year.
-    Первые 52 недели — r_year1, далее — r_year2.
-    """
+    
     w1 = _weekly_rate_from_annual(r_year1)
     w2 = _weekly_rate_from_annual(r_year2)
     inc = np.r_[np.full(min(52, horizon_weeks), w1), np.full(max(0, horizon_weeks-52), w2)]
@@ -260,7 +243,7 @@ def build_scenarios_X_weekly(X_hist, horizon_weeks=WEEKS_H):
         "Mean_revert": pd.DataFrame({c: path_mean_revert_level(X_hist[c], horizon_weeks, fut_idx) for c in X_hist.columns}, index=fut_idx),
     }
 
-# ---------- 3) Стохастические пути факторов (N(μ_ΔX, σ²_ΔX) + корреляция по истории) ----------
+
 def simulate_X_paths_with_sv_weekly(X_det_future, X_hist, n_paths=N_PATHS, corr_window=CORR_WIN, seed=SEED):
     rng = np.random.default_rng(seed)
     cols = list(X_det_future.columns)
