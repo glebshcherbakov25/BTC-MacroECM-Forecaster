@@ -11,7 +11,7 @@ from math import floor
 import warnings
 warnings.filterwarnings('ignore')
 
-# default globals (overwritten by callers)
+
 ADD_TREND = True
 TREND_DEG = 1
 week_freq = 'W-FRI'
@@ -38,9 +38,7 @@ def aggregate_to_weekly(df, date_col="date", week_freq="W-WED", agg="last",
     else:
         w = d.resample(week_freq).agg(agg)
 
-    # Оставляем метки как есть (resample уже ставит конец недели),
-    # или, если хочется нормализовать, используем how="end":
-    # w.index = w.index.to_period(week_freq).to_timestamp(how="end")
+ 
 
     if drop_all_nan:
         w = w.dropna(how="all")
@@ -97,7 +95,7 @@ def fit_short_run_on_last_window_ols(y, X, window_len, lagy, lagx,
     y_win = y.iloc[-window_len:]
     X_win = X.iloc[-window_len:]
 
-    # дизайн для коинтеграции
+    
     t = np.arange(len(y_win), dtype=float) + 1
     design = X_win.copy()
     if add_trend and trend_degree >= 1:
@@ -110,7 +108,7 @@ def fit_short_run_on_last_window_ols(y, X, window_len, lagy, lagx,
     delta = float(ols_fit.params.get("t^1", 0.0)) if add_trend and trend_degree >= 1 else 0.0
     beta_dict = {col: float(ols_fit.params.get(col, 0.0)) for col in X_win.columns}
 
-    # краткосрочная часть ECM
+    
     Y_tr, Xreg_tr = build_ecm_matrix(y_win, X_win, alpha, delta, beta_dict, lagy, lagx)
     ecm_fit = sm.OLS(Y_tr, Xreg_tr).fit()
     return alpha, delta, beta_dict, ecm_fit.params.copy()
